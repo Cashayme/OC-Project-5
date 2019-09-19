@@ -23,5 +23,5 @@ class Router extends CI_Controller
     {
         $this->load->library('layout');
         $this->layout->view('accueil');
-    }   
+    }
 }
