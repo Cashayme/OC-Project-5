@@ -5,13 +5,15 @@
       public function __construct() { 
          parent::__construct(); 
          $this->load->helper(array('form', 'url'));
-         $this->load->library('bcrypt');
+		 $this->load->library('bcrypt');
       } 
 	
       public function index() {
 			
          /* Load form validation library */ 
-         $this->load->library('form_validation');
+		 $this->load->library('form_validation');
+		 if($this->session->userdata('logged'))
+		 redirect('login/logged');
 			
 	 /* Validation rule */
 	 $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -22,9 +24,13 @@
          } 
          else { 
 			$this->load->model('login_model');
-			$result = $this->login_model->login();
-			if ($result > 0)
-			redirect('login/dashboard');
+			$result = $this->login_model->login($this->input->post('email'));
+			if ($result > 0) 
+				{
+				$this->session->set_userdata('logged', '1');
+				$this->session->set_userdata('alias', $this->login_model->getInfos($this->input->post('email')));
+				redirect('login/logged');
+				}
 			else 
 			  { 
 				$msg = "L'email et le mot de passe ne correspondent pas ou sont invalides";
@@ -33,9 +39,17 @@
 		}
 	} 
 		
-	public function dashboard()
+	public function logged()
 	  {
-	    $this->layout->view('dashboard');	
+		$this->layout->view('logged');
+		if (!$this->session->userdata('logged'))
+			redirect('login/index');
+	  }
+
+	public function logout()
+	  {
+		$this->session->sess_destroy();
+		redirect('login/index');
 	  }
  }
  

@@ -23,12 +23,11 @@
         <div class="form-group row">
             <div class="offset-4 col-8">
             <button name="submit" type="submit" class="btn btn-primary">Connexion</button>
+            <p>Pas encore inscrit ? <a href="<?php echo ''.site_url('registration/index').'' ?>">Enregistrez-vous.</a></p>
             <?php 
 		    echo form_close(); 
 		    ?>
-            </div>
         </div>
-
+    </div>
 </div>
-
 </div>

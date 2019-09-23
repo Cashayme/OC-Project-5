@@ -13,21 +13,27 @@
 <body>
     <header>
         <nav id="navbar">
-            <a class="navbar-brand" href="#"> EZ PARTY</a>
+            <a class="navbar-brand" href="<?php echo ''.site_url('router/accueil').'' ?>"> EZ PARTY</a>
             <button class="btn burger hamburger hamburger--squeeze" data-toggle="collapse" data-target="#burger-nav" >  
                 <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
                 </span> 
             </button>
             <ul id="burger-nav" class="collapse">
-                <li class="nav-btn"><a href="#"><i class="fas fa-home"></i>Accueil</a></li>
+                <li class="nav-btn"><a href="<?php echo ''.site_url('router/accueil').'' ?>"><i class="fas fa-home"></i>Accueil</a></li>
                 <li class="nav-btn"><a href="#"><i class="fas fa-info"></i>Informations</a></li>
                 <li class="nav-btn"><a href="#"><i class="fas fa-glass-cheers"></i>Evènements</a></li>
-                <li class="nav-btn"><a href="#"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
+                <?php if(!($this->session->userdata('logged')))
+                        echo '<li class="nav-btn"><a href="'.site_url('login/index').'"><i class="fas fa-sign-in-alt"></i>Connexion</a></li>';
+                    else 
+                    {
+                        echo '<li class="nav-btn"><a href="'.site_url('login/logout').'"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>';
+                    }
+                ?>
             </ul>
-            <div class="dropdown profile-view">
+            <div class="dropdown profile-view" <?php if(!($this->session->userdata('logged'))) echo 'style= "display:none"'; ?>>
                 <button id="btn-lg" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    John Doe
+                    <?php echo ''.$this->session->userdata('alias').'' ?>
                 </button>
                 <button id="btn-sm" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle"></i>
@@ -40,11 +46,17 @@
                     </div>
             </div>
             <ul id="original-nav">
-                <li class="nav-btn original-btn"><a href="#"><i class="fas fa-home"></i>Accueil</a></li>
+                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('router/accueil').'' ?>"><i class="fas fa-home"></i>Accueil</a></li>
                 <li class="nav-btn original-btn"><a href="#"><i class="fas fa-info"></i>Informations</a></li>
                 <img id="navlogo" src="../assets/images/logo.svg" alt="logo de EZ Party">
                 <li class="nav-btn original-btn"><a href="#"><i class="fas fa-glass-cheers"></i>Evènements</a></li>
-                <li class="nav-btn original-btn"><a href="#"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
+                <?php if(!($this->session->userdata('logged')))
+                        echo '<li class="nav-btn original-btn"><a href="'.site_url('login/index').'"><i class="fas fa-sign-in-alt"></i>Connexion</a></li>';
+                    else 
+                    {
+                        echo '<li class="nav-btn original-btn"><a href="'.site_url('login/logout').'"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>';
+                    }
+                ?>
             </ul>
         </nav>
     </header>

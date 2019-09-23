@@ -1,9 +1,8 @@
 <?php
 class Login_model extends CI_Model
 {
-    public function login()
+    public function login($email)
     {
-        $email = $this->input->post('email');
         $this->db->select('password') -> from('user') -> where(['email' => $email]);
         $query = $this->db->get();
         
@@ -19,5 +18,12 @@ class Login_model extends CI_Model
             $query = $this->db->where(['email' => $email, 'password' => $password])->get('user');
             return (int) $query->num_rows();
         }
+    }
+
+    public function getInfos($email) 
+    {
+        $this->db->select('alias') -> from('user') -> where(['email' => $email]);
+        $query = $this->db->get();
+        return $query->row() -> alias;
     }
 }
