@@ -14,6 +14,13 @@ html,body {
     color: $white;
     font-family: $text-font;
     height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 nav {
@@ -324,8 +331,7 @@ nav {
 footer {
     background-color: $primary;
     box-shadow: inset -5px 4px 4px 0px #00000047;
-    margin-top: 50px;
-    position: relative;
+    margin-top: auto;
 
     #foot-left {
         padding-top: 0.7rem;
@@ -400,12 +406,15 @@ footer {
             list-style: none;
             justify-content : space-around;
             width: 70%;
+            padding-inline-start: 0;
 
             @include sm {
-                width: 36%;
+                width: 70%;
                 margin-right: auto;
                 margin-left: auto;
             }
+
+            @include md { width: 40%; }
 
             @include lg { width: 70%; }
             
@@ -426,11 +435,10 @@ footer {
 
 .wrapper {
     margin-top: 110px;
-    min-height: 100%;
-    margin-bottom: -100px;
 
     .r-form {
         padding-top: 50px;
+        margin-bottom: 50px;
 
         button {
             background-color: $black;
