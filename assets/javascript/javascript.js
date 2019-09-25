@@ -31,9 +31,9 @@ function scrollFunction() {
 
 
 //Anime l'icone du menu burger
-var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
+let forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(let c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(let e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 
-var hamburgers = document.querySelectorAll(".hamburger");
+let hamburgers = document.querySelectorAll(".hamburger");
 if (hamburgers.length > 0) {
   forEach(hamburgers, function(hamburger) {
     hamburger.addEventListener("click", function() {
@@ -41,3 +41,17 @@ if (hamburgers.length > 0) {
     }, false);
   });
 }
+
+
+//Pour le formulaire d'event, affiche l'objectif de cotisation si l'input est check
+function checkShow() {
+  if(document.getElementById("mandatory_fees")) {
+    if (document.getElementById("mandatory_fees").checked) {
+      document.getElementById("maxFees").style.visibility = "visible";
+    } else {
+      document.getElementById("maxFees").style.visibility = "hidden";
+    }
+  }
+}
+
+checkShow();

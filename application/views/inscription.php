@@ -3,6 +3,7 @@
 		echo form_open('registration/index');
 	?>
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto box r-form">
+    <h1>Inscription</h1>
     <?php
     	echo validation_errors();
         if (isset($success))

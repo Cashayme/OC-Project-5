@@ -20,10 +20,18 @@ class Login_model extends CI_Model
         }
     }
 
-    public function getInfos($email) 
+    public function getInfos($email, $line) 
     {
-        $this->db->select('alias') -> from('user') -> where(['email' => $email]);
+        $this->db->select('*') -> from('user') -> where(['email' => $email]);
         $query = $this->db->get();
-        return $query->row() -> alias;
+        return $query->row() -> $line;
+    }
+
+    public function checkLogin($email, $password)
+    {
+        $email = $this->session->userdata('email');
+        $password = $this->session->userdata('password');
+        $query = $this->db->where(['email' => $email, 'password' => $password])->get('user');
+        return (int) $query->num_rows();
     }
 }

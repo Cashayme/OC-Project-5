@@ -28,7 +28,9 @@
 			if ($result > 0) 
 				{
 				$this->session->set_userdata('logged', '1');
-				$this->session->set_userdata('alias', $this->login_model->getInfos($this->input->post('email')));
+				$this->session->set_userdata('email', $this->login_model->getInfos($this->input->post('email'), email));
+				$this->session->set_userdata('password', $this->login_model->getInfos($this->input->post('email'), password));
+				$this->session->set_userdata('alias', $this->login_model->getInfos($this->input->post('email'), alias));
 				redirect('login/logged');
 				}
 			else 
@@ -40,17 +42,17 @@
 	} 
 		
 	public function logged()
-	  {
+	{
 		$this->layout->view('logged');
 		if (!$this->session->userdata('logged'))
 			redirect('login/index');
-	  }
+	}
 
 	public function logout()
-	  {
+	{
 		$this->session->sess_destroy();
 		redirect('login/index');
-	  }
+	}
  }
  
 ?>

@@ -1,6 +1,7 @@
 @import 'bootstrap.min.css';
 @import "libs/breakpoints.scss";
 @import "hamburgers/hamburgers.scss";
+@import "switch_button.css";
 
 $primary : #650696;
 $primary-light : #8800c1;
@@ -437,8 +438,10 @@ footer {
     margin-top: 110px;
 
     .r-form {
-        padding-top: 50px;
+        padding-top: 10px;
         margin-bottom: 50px;
+
+        h1 { padding: 10px; }
 
         button {
             background-color: $black;
@@ -452,3 +455,35 @@ footer {
         }
     }
 }
+
+.button-wrapper {
+    position: relative;
+    width: 150px;
+    text-align: center;
+
+    span.label {
+        position: relative;
+        z-index: 0;
+        display: inline-block;
+        width: 100%;
+        background: $black;
+        cursor: pointer;
+        color: #fff;
+        padding: 10px 0;
+        text-transform:uppercase;
+        font-size:12px;
+    }
+
+    #upload {
+        display: inline-block;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 50px;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+}
+  

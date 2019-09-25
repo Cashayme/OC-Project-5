@@ -1,13 +1,12 @@
 <div class="container-fluid wrapper">
-
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto box r-form">
+        <h1>Connexion</h1>
     <?php
 		echo form_open('login/index');
         echo validation_errors();
 		if (isset($msg))
-		echo '<p>'.$msg.'</p>';
+		echo '<p class="alert alert-danger">'.$msg.'</p>';
 	?>
-    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto box r-form">
-
         <div class="form-group row">
             <label class="col-4 col-form-label" for="email">Email</label> 
             <div class="col-8">
