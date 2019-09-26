@@ -8,6 +8,7 @@ class Event extends CI_Controller
         $this->load->helper(array('form', 'url'));
         $this->load->library('layout');
         $this->load->model('login_model');
+        $this->load->model('event_model');
     } 
 	
     public function create() {			
@@ -26,7 +27,6 @@ class Event extends CI_Controller
                    $this->layout->view('event_form'); 
                } 
                else { 
-                   $this->load->model('event_model');
                    $userId = $this->login_model->getInfos($this->session->userdata('email'), 'id_user');
 
                    /* Config upload images*/
@@ -39,6 +39,15 @@ class Event extends CI_Controller
                    $this->event_model->createEvent($userId, $file_name['file_name']);
                } 
 
+        } else {
+            redirect('/login/');
+        }
+    }
+
+    public function plan() {
+        if($this->login_model->checkLogin() > 0) {
+            $data = $this->event_model->showEvent('35')[0];
+            $this->layout->view('event_plan', $data);
         } else {
             redirect('/login/');
         }

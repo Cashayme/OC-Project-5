@@ -27,7 +27,7 @@ class Login_model extends CI_Model
         return $query->row() -> $line;
     }
 
-    public function checkLogin($email, $password)
+    public function checkLogin()
     {
         $email = $this->session->userdata('email');
         $password = $this->session->userdata('password');

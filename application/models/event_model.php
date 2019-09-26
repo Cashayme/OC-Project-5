@@ -33,4 +33,12 @@ class Event_model extends CI_Model
 
         $this->db->insert('event_plan', $data);
     }
+
+    public function showEvent($id)
+    {
+        $data = array();
+        $this->db->select('*') -> from('event_plan') -> where(['event_id' => $id]);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
