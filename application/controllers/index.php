@@ -1,6 +1,6 @@
 <?php
 
-class Router extends CI_Controller
+class Index extends CI_Controller
 {
     public function __construct()
     {
@@ -9,6 +9,9 @@ class Router extends CI_Controller
         $this->CI =& get_instance();
         
         $this->var['output'] = '';
+
+        $this->layout->add_css('style');
+        $this->layout->add_js('js');
         
     }
     
@@ -19,7 +22,7 @@ class Router extends CI_Controller
         $this->CI->load->view('../themes/default', array('output' => $this->output));
     }
 
-    public function accueil()
+    public function index()
     {
         $this->load->library('layout');
         $this->layout->view('accueil');

@@ -32,6 +32,18 @@ class Event_model extends CI_Model
         }
 
         $this->db->insert('event_plan', $data);
+
+        //Infos sur les besoins qui vont eux dans la table event_needs
+        $dataneeds['event_id'] = $this->db->insert_id();
+
+        for($l=0; $l < count($this->input->post('need')); $l++){
+
+            $dataneeds['need_name'] = $this->input->post('need')[$l];
+            $dataneeds['category'] = $this->input->post('category')[$l];
+            
+            $this->db->insert('event_needs', $dataneeds);
+
+        }
     }
 
     public function showEvent($id)
@@ -40,5 +52,13 @@ class Event_model extends CI_Model
         $this->db->select('*') -> from('event_plan') -> where(['event_id' => $id]);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function listEvent() 
+    {
+        $data = array();
+        $this->db->select('*') -> from('event_plan') -> where(['private' => TRUE]);
+        $query = $this->db->get();
+        return $query;
     }
 }

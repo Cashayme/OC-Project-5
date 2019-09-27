@@ -43,15 +43,40 @@ if (hamburgers.length > 0) {
 }
 
 
-//Pour le formulaire d'event, affiche l'objectif de cotisation si l'input est check
+//Pour le formulaire d'event, affiche les infos/input suplémentaires si leurs checkbox sont check
 function checkShow() {
   if(document.getElementById("mandatory_fees")) {
     if (document.getElementById("mandatory_fees").checked) {
-      document.getElementById("maxFees").style.visibility = "visible";
+      document.getElementById("maxFees").style.display = "flex";
     } else {
-      document.getElementById("maxFees").style.visibility = "hidden";
+      document.getElementById("maxFees").style.display = "none";
+    }
+  }
+
+  if(document.getElementById("private")) {
+    if (document.getElementById("private").checked) {
+      document.getElementById("private-info").style.display = "block";
+    } else {
+      document.getElementById("private-info").style.display = "none";
+    }
+  }
+
+  if(document.getElementById("mandatory_needs")) {
+    if (document.getElementById("mandatory_needs").checked) {
+      document.getElementById("needs-group").style.display = "block";
+    } else {
+      document.getElementById("needs-group").style.display = "none";
     }
   }
 }
+
+//Ajoute une ligne pour la liste des besoins
+function addElement()
+{
+  d = document.getElementById("need-block"); 
+  d_prime = d.cloneNode(true);
+  document.getElementById("needs-group").appendChild(d_prime);
+}
+
 
 checkShow();

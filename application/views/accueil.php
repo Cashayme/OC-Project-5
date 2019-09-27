@@ -12,19 +12,19 @@
             <ul class="d-flex flex-wrap justify-content-center">
                 <li>
                     <a href="#">
-                        <img src="../assets/images/orga-v.png" alt="Organisation">
+                        <img src="<?php echo ''.img_url('orga-v').'' ?>" alt="Organisation">
                         <p>Organisez</p>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="../assets/images/parti-v.png" alt="Participation">
+                        <img src="<?php echo ''.img_url('parti-v').'' ?>" alt="Participation">
                         <p>Participez</p>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="../assets/images/creer-v.png" alt="Création">
+                        <img src="<?php echo ''.img_url('creer-v').'' ?>" alt="Création">
                         <p>Créez</p>
                     </a>
                 </li>

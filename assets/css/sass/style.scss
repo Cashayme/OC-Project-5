@@ -24,6 +24,8 @@ body {
     flex-direction: column;
 }
 
+table { background-color: $black!important; }
+
 nav {
     background-color: $primary-light;
     box-shadow: inset -5px 4px 4px 0px #00000047;
@@ -207,6 +209,17 @@ nav {
 .box {
     border: 6px solid $white;
     background-color: $primary;
+
+    button { 
+        background-color: $black;
+        border-color: $white;
+    
+        &:hover {
+            background-color: $primary-light;
+            border-color: $black;
+    
+        }
+    }
 }
 
 #presentation-container {
@@ -491,17 +504,6 @@ footer {
 .e-plan {
     margin-bottom: 50px;
 
-    button { 
-        background-color: $black;
-        border-color: $white;
-
-        &:hover {
-            background-color: $primary-light;
-            border-color: $black;
-
-        }
-    }
-
     hr { border-top: 1px solid rgba(0, 0, 0, 0.38); }
 
     .e-img {
@@ -535,8 +537,6 @@ footer {
             height: 13rem;
         }
     }
-
-    table { background-color: $black; }
 
     .progress {
         border: 1px solid $black;

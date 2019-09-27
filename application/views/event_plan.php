@@ -2,7 +2,7 @@
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto box e-plan">
         <div class="row col-12 mt-4">
             <div class="col-lg-6 col-md-5 col-sm-12 e-img">
-                <img class="img-fluid img-thumbnail" src="./../assets/images/uploaded_images/<?php echo $event_picture; ?>" alt="Image de l'évènement">
+                <img class="img-fluid img-thumbnail" src="./../../assets/images/uploaded_images/<?php echo $event_picture; ?>" alt="Image de l'évènement">
             </div>
             <div class="col-lg-6 col-md-7 col-sm-12 e-infos">
                 <h2><?php echo $event_name; ?></h2>

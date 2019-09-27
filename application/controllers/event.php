@@ -6,11 +6,17 @@ class Event extends CI_Controller
     public function __construct() { 
         parent::__construct(); 
         $this->load->helper(array('form', 'url'));
-        $this->load->library('layout');
         $this->load->model('login_model');
         $this->load->model('event_model');
+        $this->layout->add_css('style');
+        $this->layout->add_js('javascript');
     } 
-	
+    
+    public function index() {
+        $data['events'] = $this->event_model->listEvent();
+        $this->layout->view('event_list', $data);
+    }
+
     public function create() {			
         if($this->login_model->checkLogin() > 0) {
             $this->load->library('form_validation');
@@ -40,16 +46,16 @@ class Event extends CI_Controller
                } 
 
         } else {
-            redirect('/login/');
+            redirect('/login');
         }
     }
 
-    public function plan() {
+    public function plan($id) {
         if($this->login_model->checkLogin() > 0) {
-            $data = $this->event_model->showEvent('35')[0];
+            $data = $this->event_model->showEvent($id)[0];
             $this->layout->view('event_plan', $data);
         } else {
-            redirect('/login/');
+            redirect('/login');
         }
     }
 }

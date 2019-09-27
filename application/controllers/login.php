@@ -6,6 +6,8 @@
          parent::__construct(); 
          $this->load->helper(array('form', 'url'));
 		 $this->load->library('bcrypt');
+		 $this->layout->add_css('style');
+		 $this->layout->add_js('js');
       } 
 	
       public function index() {
