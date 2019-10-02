@@ -33,6 +33,7 @@
 				$this->session->set_userdata('email', $this->login_model->getInfos($this->input->post('email'), email));
 				$this->session->set_userdata('password', $this->login_model->getInfos($this->input->post('email'), password));
 				$this->session->set_userdata('alias', $this->login_model->getInfos($this->input->post('email'), alias));
+				$this->session->set_userdata('id', $this->login_model->getInfos($this->input->post('email'), id_user));
 				redirect('login/logged');
 				}
 			else 

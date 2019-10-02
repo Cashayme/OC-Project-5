@@ -345,7 +345,6 @@ nav {
 
 footer {
     background-color: $primary-light;
-    box-shadow: inset -5px 4px 4px 0px #00000047;
     margin-top: auto;
 
     #foot-left {
@@ -430,7 +429,6 @@ footer {
             }
 
             @include md { width: 40%; }
-
             @include lg { width: 70%; }
             
 
@@ -449,7 +447,7 @@ footer {
 }
 
 .wrapper {
-    margin-top: 110px;
+    margin-top: 140px;
 
     .r-form {
         padding-top: 10px;
@@ -516,15 +514,13 @@ footer {
         padding: 11px;
         border-radius: 10px;
         border: 2px solid #ffffff42;
+        text-align: center;
 
+        strong { font-size: 1.5rem; }
         p { word-wrap: break-word; }
-        h2 { text-transform: uppercase; }
-        button { 
-            position: absolute;
-            bottom: 5px;
-
-            @include sm { position: initial; }
-            @include md { position: absolute; }
+        h2 { 
+            text-transform: uppercase;
+            font-size: 2.3rem;
         }
     }
 
@@ -542,5 +538,11 @@ footer {
         border: 1px solid $black;
     }
     .progress-bar { background-color: $primary-light!important; }
+}
+
+.rounded-img {
+    width: 40px;
+    border-radius: 100%;
+    height: 40px; 
 }
   

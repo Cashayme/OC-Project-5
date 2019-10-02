@@ -31,8 +31,7 @@ class Event extends CI_Controller
                    
                if ($this->form_validation->run() == FALSE) {
                    $this->layout->view('event_form'); 
-               } 
-               else { 
+               } else { 
                    $userId = $this->login_model->getInfos($this->session->userdata('email'), 'id_user');
 
                    /* Config upload images*/
@@ -52,9 +51,34 @@ class Event extends CI_Controller
 
     public function plan($id) {
         if($this->login_model->checkLogin() > 0) {
-            $data = $this->event_model->showEvent($id)[0];
-            $this->layout->view('event_plan', $data);
+
+            $data['event'] = $this->event_model->showEvent($id);
+            $data['needs'] = $this->event_model->getEventNeeds($id);
+            $data['participants'] = $this->event_model->participantsList($id);
+            $data['p_needs'] = $this->event_model->participantsNeeds($id);
+            $data['p_rank'] = $this->event_model->participantsRank($id)[0];
+            $data['total_fees'] = $this->event_model->totalFees($id);
+            //var_dump($data['participants']);
+
+            if ($this->event_model->isParticipants($id, $this->session->userdata('id'), TRUE)) {
+
+               $this->layout->view('event_plan', $data);
+
+            } else if ($this->event_model->isParticipants($id, $this->session->userdata('id'), FALSE)){
+
+                $data['event'] = $this->event_model->showEvent($id);
+                $data['msg'] = 'Votre invitation n\'a pas encore été acceptée';
+
+                $this->layout->view('event_invit',$data);
+
+            } else {
+
+                $data['event'] = $this->event_model->showEvent($id);
+
+                $this->layout->view('event_invit',$data);
+            }
         } else {
+
             redirect('/login');
         }
     }

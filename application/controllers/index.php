@@ -24,7 +24,6 @@ class Index extends CI_Controller
 
     public function index()
     {
-        $this->load->library('layout');
         $this->layout->view('accueil');
     }
 }
