@@ -1,3 +1,8 @@
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+  $(".btn").removeClass("waves-effect waves-light");
+});
+
 // Quand l'user scroll une page le style de la navbar s'adapte
 window.onscroll = function() {scrollFunction()};
 
@@ -70,7 +75,7 @@ function checkShow() {
   }
 }
 
-//Ajoute une ligne pour la liste des besoins
+//Ajoute une ligne pour la liste des besoins(event_form)
 function addElement()
 {
   d = document.getElementById("need-block"); 
@@ -78,5 +83,18 @@ function addElement()
   document.getElementById("needs-group").appendChild(d_prime);
 }
 
+//révèle le formulaire de nouvelle cotisation au clic sur le button (event_plan)
+function newFees()
+{ 
+  if(document.getElementById("form-fees")) {
+    document.getElementById("form-fees").style.display = "none";
+
+    document.getElementById("new-fees").addEventListener("click", function(){
+      document.getElementById("form-fees").style.display = "block";  
+      document.getElementById("new-fees").style.display = "none";
+    });     
+  }
+}
 
 checkShow();
+newFees();

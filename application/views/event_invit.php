@@ -15,7 +15,7 @@
         <?php if(isset($msg)) { 
             echo '<div class="alert alert-dark col-5 mx-auto text-center">'.$msg.'</div> '; 
             } else {
-                echo '<button class="btn btn-primary col-5 mb-3 mx-auto d-block">Je souhaite participer !</button>';
+                echo '<a href="'.site_url('event/claim/'.$data['event_id'].'/'.$this->session->userdata('id').'').'"><button class="btn btn-primary col-5 mb-3 mx-auto d-block">Je souhaite participer !</button></a>';
             }  ?>
                
     </div>

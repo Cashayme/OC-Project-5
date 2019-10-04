@@ -7,7 +7,9 @@
         $this->load->helper(array('form', 'url'));
         $this->load->library('bcrypt');
         $this->layout->add_css('style');
-        $this->layout->add_js('js');
+        $this->layout->add_js('jquery-3.4.1.min');
+        $this->layout->add_js('javascript');
+        $this->layout->add_js('mdb.min');
          
     } 
 	
