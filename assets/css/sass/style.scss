@@ -24,7 +24,12 @@ body {
     flex-direction: column;
 }
 
-table { background-color: $black!important; }
+table { 
+    background-color: $black!important;
+    border: 2px solid #ffffff42!important;
+
+    thead { border: 2px solid #ffffff42!important; }
+}
 
 nav {
     background-color: $primary-light;
@@ -447,7 +452,7 @@ footer {
 }
 
 .wrapper {
-    margin-top: 140px;
+    margin-top: 84px;
 
     .r-form {
         padding-top: 10px;

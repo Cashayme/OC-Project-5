@@ -1,6 +1,10 @@
 <div class="container-fluid wrapper mb-5">
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto box">
+        <?php if(isset($mine)) { ?>
         <h1 class="p-3">Mes évenements</h1>
+        <?php } else { ?>
+        <h1 class="p-3">J'y participe</h1>
+        <?php } ?>
         <div class="row col-12 mt-4 table-responsive">
             <table class="table table-dark">
                 <thead>
@@ -27,13 +31,15 @@
                     <td><?php echo html_escape($event->city_address) ?></td>
                     <td>
                         <a href="<?php echo ''.site_url('event/plan/'.$event->event_id.'').'' ?>"><button class="btn btn-primary m-1">Voir l'évènement</button></a>
-                        <a href="<?php if($event->event_picture != '') {
-                            echo ''.site_url('event/edit/'.$event->event_id.'/'.$event->event_picture.'').'';
-                        } else {
-                            echo ''.site_url('event/edit/'.$event->event_id.'/0').'';
-                        }
-                        ?>"><button class="btn btn-primary m-1">Editer</button></a>
-                        <a href="<?php echo ''.site_url('event/delete/'.$event->event_id.'/'.$event->event_picture.'').'' ?>"><button class="btn btn-primary m-1" onclick="return confirm('Confirmer la suppression de cet événement ?');">Supprimer</button></a>
+                        <?php if(isset($mine)) { ?>
+                            <a href="<?php if($event->event_picture != '') {
+                                echo ''.site_url('event/edit/'.$event->event_id.'/'.$event->event_picture.'').'';
+                            } else {
+                                echo ''.site_url('event/edit/'.$event->event_id.'/0').'';
+                            }
+                            ?>"><button class="btn btn-primary m-1">Editer</button></a>
+                            <a href="<?php echo ''.site_url('event/delete/'.$event->event_id.'/'.$event->event_picture.'').'' ?>"><button class="btn btn-primary m-1" onclick="return confirm('Confirmer la suppression de cet événement ?');">Supprimer</button></a>
+                        <?php } ?>
                     </td>
                     </tr>
                 <?php } ?>

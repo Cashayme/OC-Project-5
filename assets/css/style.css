@@ -864,6 +864,10 @@ body {
 
 table {
   background-color: #272525 !important;
+  border: 2px solid #ffffff42 !important;
+}
+table thead {
+  border: 2px solid #ffffff42 !important;
 }
 
 nav {
@@ -1383,7 +1387,7 @@ footer #foot-right ul li a {
 }
 
 .wrapper {
-  margin-top: 140px;
+  margin-top: 84px;
 }
 .wrapper .r-form {
   padding-top: 10px;

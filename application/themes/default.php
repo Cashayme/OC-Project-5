@@ -43,7 +43,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="#"><i class="fas fa-user-alt"></i> Mon profil</a>
                       <a class="dropdown-item" href="<?php echo ''.site_url("event/myevents").'' ?>"><i class="fas fa-glass-cheers"></i> Mes évènements</a>
-                      <a class="dropdown-item" href="#"><i class="fas fa-users"></i> J'y participe</a>
+                      <a class="dropdown-item" href="<?php echo ''.site_url("event/iparticipate").'' ?>"><i class="fas fa-users"></i> J'y participe</a>
                       <a class="dropdown-item" href="#"><i class="fas fa-tools"></i> Panneau d'administration</a>
                     </div>
             </div>

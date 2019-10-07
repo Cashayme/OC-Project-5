@@ -180,8 +180,15 @@ class Event_model extends CI_Model
 
     public function myEvents($id)
     {
-        $data = array();
         $this->db->select('*') -> from('event_plan') -> where(['creator_id' => $id]);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function iParticipate($id)
+    {
+        $this->db->select('*') -> from('event_participants') -> where(['user_id' => $id]);
+        $this->db->join('event_plan', 'event_plan.event_id = event_participants.event_id', 'inner');
         $query = $this->db->get();
         return $query;
     }

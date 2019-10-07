@@ -126,7 +126,16 @@ class Event extends CI_Controller
     public function myEvents() {
         if ($this->login_model->checkLogin() > 0) {
             $data['events'] = $this->event_model->myEvents($this->session->userdata('id'));
-            //var_dump($data['events']->result());
+            $data['mine'] = 1;
+            $this->layout->view('my_events',$data);
+        } else {
+            redirect('/login');
+        }
+    }
+
+    public function iParticipate() {
+        if ($this->login_model->checkLogin() > 0) {
+            $data['events'] = $this->event_model->iParticipate($this->session->userdata('id'));
             $this->layout->view('my_events',$data);
         } else {
             redirect('/login');
