@@ -12,7 +12,8 @@ class Index extends CI_Controller
 
         $this->layout->add_css('style');
         $this->layout->add_js('jquery-3.4.1.min');
-        $this->layout->add_js('javascript');
+        $this->layout->add_js('front');
+        $this->layout->add_js('main');
         
     }
     

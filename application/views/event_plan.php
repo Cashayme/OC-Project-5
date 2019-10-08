@@ -18,16 +18,16 @@
         <hr>
         <div class="row col-12 mt-4">
             <div class="col-lg-6 col-md-5 col-sm-12 e-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11566.017800943258!2d3.5306775!3d43.55437075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1569487613640!5m2!1sfr!2sfr" class="img-thumbnail" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            <div id="map"></div>
             </div>
             <div class="col-lg-6 col-md-7 col-sm-12 e-infos">
-                <h2><?php echo $data['city_address']; ?></h2>
+                <h2 id="city-address"><?php echo $data['city_address']; ?></h2>
                 <p><strong><?php echo $data['zip_code_address']; ?></strong></p>
-                <p><?php echo $data['address']; ?></p>
+                <p id="address"><?php echo $data['address']; ?></p>
 
             <?php } ?>
 
-                <button class="btn btn-primary">Itinéraire vers le lieu</button>
+                <a target="_blank" rel="noopener noreferrer" id="itinerary" ><button class="btn btn-primary">Itinéraire vers le lieu</button></a>
             </div>
         </div>
         <hr>
@@ -185,3 +185,6 @@
         </div>
     </div>
 </div>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXRn5rmqdbhE0SknwFL8ILrBnnfiQA_lM&callback=initMap">google.maps.event.addDomListener(window,'load', initMap);
+</script>

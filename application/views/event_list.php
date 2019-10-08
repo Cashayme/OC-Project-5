@@ -5,7 +5,7 @@
         <a href="<?php echo ''.site_url('event/create').'' ?>"><button class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Créer un évènement</button></a>
 
         <div class="row col-12 mt-4 table-responsive">
-            <table class="table table-dark">
+        <table class="table table-dark">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -15,7 +15,7 @@
                     <th scope="col">Participation</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="content">
                 <?php foreach($events->result() as $event) { ?>
                     <tr>
                     <th scope="row"><img class="rounded-img" src="assets/images/uploaded_images/<?php if ($event->event_picture) {
@@ -31,6 +31,7 @@
                 <?php } ?>
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>

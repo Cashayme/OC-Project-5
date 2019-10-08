@@ -10,13 +10,21 @@ class Event extends CI_Controller
         $this->load->model('event_model');
         $this->layout->add_css('style');
         $this->layout->add_js('jquery-3.4.1.min');
-        $this->layout->add_js('javascript');
         $this->layout->add_js('mdb.min');
+        $this->layout->add_js('front');
+        $this->layout->add_js('event');
+        $this->layout->add_js('main');
     } 
     
     public function index() {
-        $data['events'] = $this->event_model->listEvent();
+        $this->layout->add_js('infinitescroll');
+        $data['events'] = $this->event_model->listEvent(0);
         $this->layout->view('event_list', $data);
+    }
+
+    public function more($offset) {
+        $data['events'] = $this->event_model->listEvent($offset);
+        $this->load->view('more',$data);
     }
 
     public function create() {			
@@ -56,9 +64,9 @@ class Event extends CI_Controller
     public function plan($id) {
         if ($this->login_model->checkLogin() > 0) {
 
-            $data['event'] = $this->event_model->showEvent($id);
+            $this->layout->add_js('map');
 
-            //var_dump($data['participants']);
+            $data['event'] = $this->event_model->showEvent($id);
 
             if ($this->event_model->isParticipants($id, $this->session->userdata('id'), TRUE)) {
                 $data['needs'] = $this->event_model->getEventNeeds($id);

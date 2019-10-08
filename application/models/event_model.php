@@ -74,10 +74,10 @@ class Event_model extends CI_Model
         return $query;
     }
 
-    public function listEvent() 
+    public function listEvent($offset) 
     {
         $data = array();
-        $this->db->select('*') -> from('event_plan') -> where(['private' => TRUE]);
+        $this->db->select('*') -> from('event_plan') -> where(['private' => TRUE]) -> limit(10) -> offset($offset);
         $query = $this->db->get();
         return $query;
     }
@@ -256,7 +256,7 @@ class Event_model extends CI_Model
 
     public function isAdmin($eventId, $userId)
     {//Vérifie le rang de l'utilisateur sur l'event en question
-        $this->db->select('super_user') -> from('event_participants') -> where(['event_id' => $eventId, 'user_id' => $userId]);
+        $this->db->select('super_user') -> from('event_participants') -> where(['event_id' => $eventId, 'user_id' => $userId, 'super_user' => TRUE]);
         $admin = $this->db->get();
 
         $this->db->select('creator_id') -> from('event_plan') -> where(['event_id' => $eventId, 'creator_id' => $userId]);
@@ -264,7 +264,7 @@ class Event_model extends CI_Model
         
         if (isset($creator->result()[0])) {
             return 'creator';
-        } else if ($admin->result()[0] == '1') {
+        } else if (!empty($admin->result())) {
             return 'admin';
         } else {
             return 'user';

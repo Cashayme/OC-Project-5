@@ -866,6 +866,9 @@ table {
   background-color: #272525 !important;
   border: 2px solid #ffffff42 !important;
 }
+table td {
+  padding: 0.55rem !important;
+}
 table thead {
   border: 2px solid #ffffff42 !important;
 }
@@ -1477,9 +1480,10 @@ footer #foot-right ul li a {
     margin-bottom: 0;
   }
 }
-.e-plan .e-map iframe {
+.e-plan .e-map #map {
   width: 100%;
   height: 13rem;
+  border-radius: 11px;
 }
 .e-plan .progress {
   border: 1px solid #272525;
@@ -1492,6 +1496,13 @@ footer #foot-right ul li a {
   width: 40px;
   border-radius: 100%;
   height: 40px;
+}
+
+#content .hidden {
+  display: none;
+}
+#content #loader {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
