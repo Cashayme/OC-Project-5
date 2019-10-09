@@ -196,14 +196,9 @@ class Event extends CI_Controller
                     $this->load->library('upload', $config);
                     $this->upload->do_upload('file_name');
                     $file_name = $this->upload->data();
-                    
-
-                    //$this->event_model->editEvent($eventId, $userId,$this->input->post('actual_pic'));
 
                     $this->event_model->editEvent($eventId, $userId, $file_name['file_name']);
 
-
-                    //var_dump($this->event_model->showEvent($eventId)[0]['event_picture']);
                     redirect('/event/myevents');
                 }
             } else {

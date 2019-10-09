@@ -11,19 +11,19 @@
         <div class="row fade-in" id="container-2">
             <ul class="d-flex flex-wrap justify-content-center">
                 <li>
-                    <a href="#">
+                    <a href="<?php echo site_url('event/myevents'); ?>">
                         <img src="<?php echo ''.img_url('orga-v').'' ?>" alt="Organisation">
                         <p>Organisez</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo site_url('event/'); ?>">
                         <img src="<?php echo ''.img_url('parti-v').'' ?>" alt="Participation">
                         <p>Participez</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo site_url('event/create'); ?>">
                         <img src="<?php echo ''.img_url('creer-v').'' ?>" alt="Création">
                         <p>Créez</p>
                     </a>
