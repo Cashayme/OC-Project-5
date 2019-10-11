@@ -38,11 +38,16 @@ class Event_model extends CI_Model
 
         $dataneeds['event_id'] = $this->db->insert_id();
 
-        //Insère le créateur comme participant
+        //Insère le créateur comme participant et cotisateur
         $part['user_id'] = $userId;
         $part['event_id'] = $this->db->insert_id();
         $part['authorized'] = TRUE;
+        
+        $fees['user_id'] = $userId;
+        $fees['event_id'] = $this->db->insert_id();
+        $fees['fees'] = 0;
         $this->db->insert('event_participants', $part);
+        $this->db->insert('membership_fees', $fees);
 
         //Infos sur les besoins qui vont eux dans la table event_needs
 
@@ -95,9 +100,9 @@ class Event_model extends CI_Model
     public function participantsList($id) 
     {
         $data = array();
-        $this->db->select('*') -> from('event_participants') -> where(['event_participants.event_id' => $id, 'authorized'=> TRUE]);
+        $this->db->select('*') -> from('event_participants') -> where(['event_participants.event_id' => $id, 'authorized'=> TRUE, 'membership_fees.event_id' => $id]);
         $this->db->join('user', 'event_participants.user_id = user.id_user', 'left');
-        $this->db->join('membership_fees', 'membership_fees.event_id = event_participants.event_id', 'left');
+        $this->db->join('membership_fees', 'membership_fees.user_id = event_participants.user_id', 'left');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -285,6 +290,11 @@ class Event_model extends CI_Model
 
     public function acceptClaim($eventId, $userId)
     {
+        $fees['user_id'] = $userId;
+        $fees['event_id'] = $eventId;
+        $fees['fees'] = 0;
+        $this->db->insert('membership_fees', $fees);
+
         $data['authorized'] = TRUE;
         $this->db->where(['user_id' => $userId, 'event_id' => $eventId]);
         $this->db->update('event_participants', $data);

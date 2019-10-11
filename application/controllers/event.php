@@ -9,6 +9,7 @@ class Event extends CI_Controller
         $this->load->model('event_model');
         $this->layout->add_css('style');
         $this->layout->add_js('jquery-3.4.1.min');
+        $this->layout->add_js('toastr');
         $this->layout->add_js('mdb.min');
         $this->layout->add_js('front');
         $this->layout->add_js('event');
@@ -52,6 +53,7 @@ class Event extends CI_Controller
                    $file_name = $this->upload->data();
 
                    $this->event_model->createEvent($userId, $file_name['file_name']);
+                   $this->session->set_userdata('toast-success', 'Votre évènement a été créé');
                    redirect('/event/myevents');
                } 
 
@@ -67,38 +69,44 @@ class Event extends CI_Controller
 
             $data['event'] = $this->event_model->showEvent($id);
 
-            if ($this->event_model->isParticipants($id, $this->session->userdata('id'), TRUE)) {
-                $data['needs'] = $this->event_model->getEventNeeds($id);
-                $data['participants'] = $this->event_model->participantsList($id);
-                $data['claimers'] = $this->event_model->claimersList($id);
-                $data['p_needs'] = $this->event_model->participantsNeeds($id);
-                $data['p_rank'] = $this->event_model->participantsRank($id)[0];
-                $data['total_fees'] = $this->event_model->totalFees($id);
+            if (!empty($data['event'][0])) {
+                if ($this->event_model->isParticipants($id, $this->session->userdata('id'), TRUE)) {
+                    $data['needs'] = $this->event_model->getEventNeeds($id);
+                    $data['participants'] = $this->event_model->participantsList($id);
 
-                if($this->event_model->isAdmin($id, $this->session->userdata('id')) == 'creator') {
-                    $data['creator'] = '1';
+                    $data['claimers'] = $this->event_model->claimersList($id);
+                    $data['p_needs'] = $this->event_model->participantsNeeds($id);
+                    $data['p_rank'] = $this->event_model->participantsRank($id)[0];
+                    $data['total_fees'] = $this->event_model->totalFees($id);
+    
+                    if($this->event_model->isAdmin($id, $this->session->userdata('id')) == 'creator') {
+                        $data['creator'] = '1';
+                    }
+    
+                    if($this->event_model->isAdmin($id, $this->session->userdata('id')) == 'admin') {
+                        $data['admin'] = '1';
+                    }
+    
+                   $this->layout->view('event_plan', $data);
+    
+                } else if ($this->event_model->isParticipants($id, $this->session->userdata('id'), FALSE)){
+    
+                    $data['event'] = $this->event_model->showEvent($id);
+                    $data['msg'] = 'Votre invitation n\'a pas encore été acceptée';
+    
+                    $this->layout->view('event_invit',$data);
+    
+                } else {
+    
+                    $data['event'] = $this->event_model->showEvent($id);
+    
+                    $this->layout->view('event_invit',$data);
                 }
-
-                if($this->event_model->isAdmin($id, $this->session->userdata('id')) == 'admin') {
-                    $data['admin'] = '1';
-                }
-
-               $this->layout->view('event_plan', $data);
-
-            } else if ($this->event_model->isParticipants($id, $this->session->userdata('id'), FALSE)){
-
-                $data['event'] = $this->event_model->showEvent($id);
-                $data['msg'] = 'Votre invitation n\'a pas encore été acceptée';
-
-                $this->layout->view('event_invit',$data);
-
             } else {
-
-                $data['event'] = $this->event_model->showEvent($id);
-
-                $this->layout->view('event_invit',$data);
+                $this->layout->view('error_404');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -114,9 +122,11 @@ class Event extends CI_Controller
                 redirect('event/plan/'.$eventId.'');
             } else { 
                 $this->event_model->newFees($eventId, $this->session->userdata('id'));
+                $this->session->set_userdata('toast-success', 'Nouvelle cotisation ajoutée');
                 redirect('event/plan/'.$eventId.'#fees');
             } 
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -126,6 +136,7 @@ class Event extends CI_Controller
             $this->event_model->newSupplier($needId,$this->session->userdata('id'));
             redirect('event/plan/'.$eventId.'#participants');
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -136,6 +147,7 @@ class Event extends CI_Controller
             $data['mine'] = 1;
             $this->layout->view('my_events',$data);
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -145,6 +157,7 @@ class Event extends CI_Controller
             $data['events'] = $this->event_model->iParticipate($this->session->userdata('id'));
             $this->layout->view('my_events',$data);
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -153,6 +166,7 @@ class Event extends CI_Controller
         if ($this->login_model->checkLogin() > 0) {
             if($this->event_model->isAdmin($eventId, $this->session->userdata('id')) == 'creator') {
                 $this->event_model->deleteEvent($eventId, $this->session->userdata('id'));
+                $this->session->set_userdata('toast-info', 'L\'évènement a été supprimé');
 
                 if($image != 'default.jpg' ) {
                     unlink("assets/images/uploaded_images/$image");
@@ -161,6 +175,7 @@ class Event extends CI_Controller
 
             redirect('event/myevents');
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -197,7 +212,7 @@ class Event extends CI_Controller
                     $file_name = $this->upload->data();
 
                     $this->event_model->editEvent($eventId, $userId, $file_name['file_name']);
-
+                    $this->session->set_userdata('toast-success', 'L\'évenement a été modifié');
                     redirect('/event/myevents');
                 }
             } else {
@@ -205,6 +220,7 @@ class Event extends CI_Controller
             }
 
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -219,6 +235,7 @@ class Event extends CI_Controller
             }
 
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -240,6 +257,7 @@ class Event extends CI_Controller
             }
 
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -253,6 +271,7 @@ class Event extends CI_Controller
                 redirect('event/plan/'.$eventId.'#needs');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -263,6 +282,7 @@ class Event extends CI_Controller
             $this->event_model->claim($eventId, $userId);
             redirect('event/plan/'.$eventId.'');
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -272,11 +292,13 @@ class Event extends CI_Controller
         if ($this->login_model->checkLogin() > 0) {
             if(($this->event_model->isAdmin($eventId, $this->session->userdata('id')) == 'creator') || ($this->event_model->isAdmin($eventId, $this->session->userdata('id')) == 'admin')) {
                 $this->event_model->acceptClaim($eventId, $userId);
+                $this->session->set_userdata('toast-info', 'L\'utilisateur a rejoint les participants');
                 redirect('event/plan/'.$eventId.'');
             } else {
                 redirect('event/plan/'.$eventId.'');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -286,11 +308,13 @@ class Event extends CI_Controller
         if ($this->login_model->checkLogin() > 0) {
             if(($this->event_model->isAdmin($eventId, $this->session->userdata('id')) == 'creator') || ($this->event_model->isAdmin($eventId, $this->session->userdata('id')) == 'admin')) {
                 $this->event_model->deleteParticipant($eventId, $userId);
+                $this->session->set_userdata('toast-info', 'L\'utilisateur ne fait plus partie des participants');
                 redirect('event/plan/'.$eventId.'');
             } else {
                 redirect('event/plan/'.$eventId.'');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }

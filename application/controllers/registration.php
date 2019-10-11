@@ -8,6 +8,7 @@
         $this->load->library('bcrypt');
         $this->layout->add_css('style');
         $this->layout->add_js('jquery-3.4.1.min');
+        $this->layout->add_js('toastr');
         $this->layout->add_js('front');
         $this->layout->add_js('main');
         $this->layout->add_js('mdb.min');
@@ -31,13 +32,13 @@
     $this->form_validation->set_rules('address', 'Adresse', 'required');	 
 			
         if ($this->form_validation->run() == FALSE) { 
-            $this->layout->view('inscription'); 
+            $this->layout->view('registration');
         } 
         else { 
             $this->load->model('register_model');
 		    $this->register_model->saveCustomer();
-		    $success = "Vous êtes enregistré !";
-            $this->layout->view('inscription', compact('success')); 
+		    $this->session->set_userdata('toast-success', 'Vous êtes enregistré');
+            redirect('/login');
         } 
     }
 
@@ -46,10 +47,9 @@
 	    $query = $this->db->where('email', $email)->get("user");
 		if ($query->num_rows() > 0)
 		{
-			$this->form_validation->set_message('check_customer','L\'email '.$email.' est déjà utilisé par un autre compte');
-		    return FALSE;
-		}
-		else 
+            $this->session->set_userdata('toast-error', 'L\'email '.$email.' est déjà utilisé par un autre compte');
+            return FALSE;
+		} else 
 			return TRUE;
 	  }	
    }

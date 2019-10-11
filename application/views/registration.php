@@ -4,11 +4,6 @@
 	?>
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto box r-form">
     <h1>Inscription</h1>
-    <?php
-    	echo validation_errors();
-        if (isset($success))
-        echo '<div class="alert alert-success" role="alert">'.$success.'</div>';
-    ?>
         <div class="form-group row">
             <label class="col-4 col-form-label" for="email">Email</label> 
             <div class="col-8">

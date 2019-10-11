@@ -11,6 +11,7 @@ class Admin extends CI_Controller
         $this->load->model('admin_model');
         $this->layout->add_css('style');
         $this->layout->add_js('jquery-3.4.1.min');
+        $this->layout->add_js('toastr');
         $this->layout->add_js('front');
         $this->layout->add_js('main');
     }
@@ -23,9 +24,10 @@ class Admin extends CI_Controller
                 $data['events'] = $this->admin_model->listEvent(0);
                 $this->layout->view('admin',$data);
             } else {
-                show_404();
+                $this->layout->view('error_404');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -37,9 +39,10 @@ class Admin extends CI_Controller
                 $data['admin'] = 1;
                 $this->load->view('more',$data);
             } else {
-                show_404();
+                $this->layout->view('error_404');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -51,9 +54,10 @@ class Admin extends CI_Controller
                 $data['admin'] = 1;
                 $this->load->view('more',$data);
             } else {
-                show_404();
+                $this->layout->view('error_404');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -62,11 +66,13 @@ class Admin extends CI_Controller
         if ($this->login_model->checkLogin() > 0) {
             if($this->admin_model->checkPowers($this->session->userdata('id'))) {
                 $this->event_model->deleteEvent($eventId, $userId);
+                $this->session->set_userdata('toast-info', 'L\'évènement a été supprimé');
                 redirect('/admin');
             } else {
-                show_404();
+                $this->layout->view('error_404');
             }
         } else {
+            $this->session->set_userdata('toast-error', 'Vous devez être connecté pour faire ça');
             redirect('/login');
         }
     }
@@ -78,7 +84,7 @@ class Admin extends CI_Controller
                 $data['users'] = $this->admin_model->listUser(0);
                 $this->layout->view('admin',$data);
             } else {
-                show_404();
+                $this->layout->view('error_404');
             }
         } else {
             redirect('/login');
@@ -89,9 +95,10 @@ class Admin extends CI_Controller
         if ($this->login_model->checkLogin() > 0) {
             if($this->admin_model->checkPowers($this->session->userdata('id'))) {
                 $this->admin_model->deleteUser($userId);
+                $this->session->set_userdata('toast-info', 'L\'utilisateur a été supprimé');
                 redirect('/admin/listuser');
             } else {
-                show_404();
+                $this->layout->view('error_404');
             }
         } else {
             redirect('/login');

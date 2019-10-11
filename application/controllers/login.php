@@ -8,6 +8,7 @@
 		 $this->load->library('bcrypt');
 		 $this->layout->add_css('style');
 		 $this->layout->add_js('jquery-3.4.1.min');
+		 $this->layout->add_js('toastr');
 		 $this->layout->add_js('front');
 		 $this->layout->add_js('main');
 		 $this->layout->add_js('mdb.min');
@@ -43,12 +44,13 @@
 					$this->session->set_userdata('admin', 1);
 				}
 
-				redirect('login/logged');
+				$this->session->set_userdata('toast-success', 'Vous êtes connecté');
+				redirect('index');
 				}
 			else 
 			  { 
-				$msg = "L'email et le mot de passe ne correspondent pas ou sont invalides";
-				$this->layout->view('login', compact('msg'));
+				$this->session->set_userdata('toast-error', 'L\'email et le mot de passe ne correspondent pas ou sont invalides');
+				$this->layout->view('login');
 			  } 
 		}
 	} 
