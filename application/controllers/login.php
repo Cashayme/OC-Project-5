@@ -29,6 +29,7 @@
          } 
          else { 
 			$this->load->model('login_model');
+			$this->load->model('admin_model');
 			$result = $this->login_model->login($this->input->post('email'));
 			if ($result > 0) 
 				{
@@ -37,6 +38,11 @@
 				$this->session->set_userdata('password', $this->login_model->getInfos($this->input->post('email'), password));
 				$this->session->set_userdata('alias', $this->login_model->getInfos($this->input->post('email'), alias));
 				$this->session->set_userdata('id', $this->login_model->getInfos($this->input->post('email'), id_user));
+
+				if($this->admin_model->checkPowers($this->session->userdata('id'))) {
+					$this->session->set_userdata('admin', 1);
+				}
+
 				redirect('login/logged');
 				}
 			else 

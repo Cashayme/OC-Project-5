@@ -77,7 +77,7 @@ class Event_model extends CI_Model
     public function listEvent($offset) 
     {
         $data = array();
-        $this->db->select('*') -> from('event_plan') -> where(['private' => TRUE]) -> limit(10) -> offset($offset);
+        $this->db->select('*') -> from('event_plan') -> where(['private' => TRUE]) -> limit(10) -> offset($offset) -> order_by("event_id", "desc");
         $query = $this->db->get();
         return $query;
     }
@@ -97,7 +97,7 @@ class Event_model extends CI_Model
         $data = array();
         $this->db->select('*') -> from('event_participants') -> where(['event_participants.event_id' => $id, 'authorized'=> TRUE]);
         $this->db->join('user', 'event_participants.user_id = user.id_user', 'left');
-        $this->db->join('membership_fees', 'membership_fees.user_id = user.id_user', 'left');
+        $this->db->join('membership_fees', 'membership_fees.event_id = event_participants.event_id', 'left');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -180,14 +180,14 @@ class Event_model extends CI_Model
 
     public function myEvents($id)
     {
-        $this->db->select('*') -> from('event_plan') -> where(['creator_id' => $id]);
+        $this->db->select('*') -> from('event_plan') -> where(['creator_id' => $id]) -> order_by("event_id", "desc");
         $query = $this->db->get();
         return $query;
     }
 
     public function iParticipate($id)
     {
-        $this->db->select('*') -> from('event_participants') -> where(['user_id' => $id]);
+        $this->db->select('*') -> from('event_participants') -> where(['user_id' => $id])  -> order_by("event_plan.event_id", "desc");
         $this->db->join('event_plan', 'event_plan.event_id = event_participants.event_id', 'inner');
         $query = $this->db->get();
         return $query;

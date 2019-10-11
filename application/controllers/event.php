@@ -2,7 +2,6 @@
   
 class Event extends CI_Controller 
 {
-   
     public function __construct() { 
         parent::__construct(); 
         $this->load->helper(array('form', 'url'));
@@ -17,7 +16,7 @@ class Event extends CI_Controller
     } 
     
     public function index() {
-        $this->layout->add_js('infinitescroll');
+        $this->layout->add_js('ajax/listevent');
         $data['events'] = $this->event_model->listEvent(0);
         $this->layout->view('event_list', $data);
     }

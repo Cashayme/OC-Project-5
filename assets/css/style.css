@@ -1505,4 +1505,14 @@ footer #foot-right ul li a {
   display: none;
 }
 
+input {
+  background-color: #272525 !important;
+  color: #c6c6c6 !important;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -156,32 +156,40 @@
             
         </div>
         <?php foreach($event as $data) { ?>
-        <div class="row col-12 mt-4" <?php if($data['mandatory_fees'] == FALSE) { echo 'style="display:none;"'; } ?>>
-            <h2 id="fees" class="col-12">Cotisations</h2>
-            <?php foreach($total_fees as $fees) { ?>
-            <p class="col-12"><?php if(isset($fees['fees'])) {echo $fees['fees'];} else { echo "0";}  ?>€ sur les <?php echo $data['max_fees']; ?>€ nécessaires</p>
-            
-            <div class="col-6">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: <?php echo ($fees['fees'] / $data['max_fees']) * 100; ?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="10"></div>
-                </div>
-                <button id="new-fees" class="btn btn-primary mt-3 mb-3" onclick="newFees();">Nouvelle cotisation</button>
-                <?php
-		            echo form_open('event/fees/'.$data['event_id'].'');
-                ?>
-                <div class="form-group row" id="form-fees">
-                    <label for="new_fees" class="col-8 col-form-label">Nouvelle cotisation</label> 
-                    <div class="col-8">
-                        <input id="new_fees" name="new_fees" type="number" class="form-control" placeholder="€" required>
-                        <button name="submit" type="submit" class="btn btn-primary mt-3">Envoyer</button>
+        <div class="row">
+            <div class="col-12 col-lg-6 mt-4" <?php if($data['mandatory_fees'] == FALSE) { echo 'style="display:none;"'; } ?>>
+                <h2 id="fees" class="col-12">Cotisations</h2>
+                <?php foreach($total_fees as $fees) { ?>
+                <p class="col-12"><?php if(isset($fees['fees'])) {echo $fees['fees'];} else { echo "0";}  ?>€ sur les <?php echo $data['max_fees']; ?>€ nécessaires</p>
+                
+                <div class="col-12">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: <?php echo ($fees['fees'] / $data['max_fees']) * 100; ?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="10"></div>
                     </div>
+                    <button id="new-fees" class="btn btn-primary mt-3 mb-3" onclick="newFees();">Nouvelle cotisation</button>
+                    <?php
+                        echo form_open('event/fees/'.$data['event_id'].'');
+                    ?>
+                    <div class="form-group row" id="form-fees">
+                        <label for="new_fees" class="col-8 col-form-label">Nouvelle cotisation</label> 
+                        <div class="col-8">
+                            <input id="new_fees" name="new_fees" type="number" class="form-control" placeholder="€" required>
+                            <button name="submit" type="submit" class="btn btn-primary mt-3">Envoyer</button>
+                        </div>
+                    </div>
+                    <?php 
+                        echo form_close(); 
+                    ?>
                 </div>
-                <?php 
-		            echo form_close(); 
-	            ?>
+
             </div>
+            <div class="col-12 col-lg-6 mt-4 mb-3">
+                    <h2>Envoyer un invitation</h2>
+                    <p><small>Envoyez ce lien aux personnes que vous souhaitez inviter à l'évènement :</small></p>
+                    <input class="col-10" type="text" value="<?php echo site_url('event/plan/'.$data['event_id'].'')?>">
+            </div>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
         </div>
     </div>
 </div>
