@@ -2,33 +2,32 @@
   
    class Login extends CI_Controller {
    
-      public function __construct() { 
-         parent::__construct(); 
-         $this->load->helper(array('form', 'url'));
-		 $this->load->library('bcrypt');
-		 $this->layout->add_css('style');
-		 $this->layout->add_js('jquery-3.4.1.min');
-		 $this->layout->add_js('toastr');
-		 $this->layout->add_js('front');
-		 $this->layout->add_js('main');
-		 $this->layout->add_js('mdb.min');
-      } 
+    public function __construct() { 
+        parent::__construct(); 
+        $this->load->helper(array('form', 'url'));
+		$this->load->library('bcrypt');
+		$this->layout->add_css('style');
+		$this->layout->add_js('jquery-3.4.1.min');
+		$this->layout->add_js('toastr');
+		$this->layout->add_js('front');
+		$this->layout->add_js('main');
+		$this->layout->add_js('mdb.min');
+    } 
 	
-      public function index() {
+    public function index() { 
+		$this->load->library('form_validation');
+		if($this->session->userdata('logged')) {
+			$this->session->set_userdata('toast-success', 'Vous déjà connecté');
+			redirect('index');
+		}
 			
-         /* Load form validation library */ 
-		 $this->load->library('form_validation');
-		 if($this->session->userdata('logged'))
-		 redirect('login/logged');
+		// Validation rule
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required');	 
 			
-	 /* Validation rule */
-	 $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-	 $this->form_validation->set_rules('password', 'Password', 'required');	 
-			
-         if ($this->form_validation->run() == FALSE) { 
+        if ($this->form_validation->run() == FALSE) { 
             $this->layout->view('login'); 
-         } 
-         else { 
+        } else { 
 			$this->load->model('login_model');
 			$this->load->model('admin_model');
 			$result = $this->login_model->login($this->input->post('email'));
@@ -46,21 +45,12 @@
 
 				$this->session->set_userdata('toast-success', 'Vous êtes connecté');
 				redirect('index');
-				}
-			else 
-			  { 
+				} else { 
 				$this->session->set_userdata('toast-error', 'L\'email et le mot de passe ne correspondent pas ou sont invalides');
 				$this->layout->view('login');
-			  } 
+				} 
 		}
 	} 
-		
-	public function logged()
-	{
-		$this->layout->view('logged');
-		if (!$this->session->userdata('logged'))
-			redirect('login/index');
-	}
 
 	public function logout()
 	{

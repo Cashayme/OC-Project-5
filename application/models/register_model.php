@@ -3,7 +3,7 @@
 class Register_model extends CI_Model
 {
     public function saveCustomer()
-    {
+    {//Enregistre un nouvel user
        $data['name'] = $this->input->post('name');
        $data['first_name'] = $this->input->post('first_name');
        $data['alias'] = $this->input->post('alias');

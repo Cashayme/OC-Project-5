@@ -3,7 +3,7 @@
 class Profile_model extends CI_Model
 {
     public function showProfile($id)
-    {
+    {//Récupère les infos du profil de l'user
         $data = array();
         $this->db->select('*') -> from('user') -> where(['id_user' => $id]);
         $query = $this->db->get();
@@ -11,7 +11,7 @@ class Profile_model extends CI_Model
     }
 
     public function editProfile($id)
-    {
+    {//Edite le profil
         $data['alias'] = $this->input->post('alias');
         $data['email'] = $this->input->post('email');
         $data['city_address'] = $this->input->post('city_address');

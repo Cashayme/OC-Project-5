@@ -19,7 +19,7 @@ class Profile extends CI_Controller
         if ($this->login_model->checkLogin() > 0) {
             $this->load->library('form_validation');
                 
-            /* Validation rule */
+            // Validation rule
             $this->form_validation->set_rules('alias', 'Pseudonyme', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required');
             $this->form_validation->set_rules('city_address', 'Ville de l\'évènement', 'required');

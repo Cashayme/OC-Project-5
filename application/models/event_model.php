@@ -2,7 +2,7 @@
 class Event_model extends CI_Model
 {
     public function createEvent($userId, $image)
-    {
+    {//Créer un event
         $data['creator_id'] = $userId;
         $data['event_name'] = $this->input->post('event_name');
         $data['event_description'] = $this->input->post('event_description');
@@ -13,22 +13,26 @@ class Event_model extends CI_Model
         $data['max_fees'] = $this->input->post('max_fees');
 
         if(strlen($image) > 0) {
+            //Si une image a été upload, l'inclue aux data
             $data['event_picture'] = $image;    
         }        
 
         if($this->input->post('private')) {
+            //Conversion des values checkbox en booléen
             $data['private'] = TRUE;
         } else {
             $data['private'] = FALSE;
         }
 
         if($this->input->post('mandatory_fees')) {
+            //Conversion des values checkbox en booléen
             $data['mandatory_fees'] = TRUE;
         } else {
             $data['mandatory_fees'] = FALSE;
         }
 
         if($this->input->post('mandatory_needs')) {
+            //Conversion des values checkbox en booléen
             $data['mandatory_needs'] = TRUE;
         } else {
             $data['mandatory_needs'] = FALSE;
@@ -52,8 +56,10 @@ class Event_model extends CI_Model
         //Infos sur les besoins qui vont eux dans la table event_needs
 
         for($l=0; $l < count($this->input->post('need')); $l++){
+            //Les inputs des besoins ont le même nom, donc on boucle la requête pour insérer chaques row de l'array
 
             if(strlen($this->input->post('need')[$l]) > 0) {
+                //Si la value n'est pas vide
                 $dataneeds['need_name'] = $this->input->post('need')[$l];
                 $dataneeds['category'] = $this->input->post('category')[$l];
                 $this->db->insert('event_needs', $dataneeds);
@@ -62,7 +68,7 @@ class Event_model extends CI_Model
     }
 
     public function showEvent($id)
-    {
+    {//Récupère toutes les infos d'un event
         $data = array();
         $this->db->select('*') -> from('event_plan') -> where(['event_id' => $id]);
         $query = $this->db->get();
@@ -70,7 +76,7 @@ class Event_model extends CI_Model
     }
 
     public function getEventNeeds($id)
-    {
+    {//Récupère tous les besoins d'un event
         $data = array();
         $this->db->select('*') -> from('event_needs') -> where(['event_id' => $id]);
         $this->db->join('user', 'event_needs.supplier_id = user.id_user', 'left');
@@ -80,7 +86,7 @@ class Event_model extends CI_Model
     }
 
     public function listEvent($offset) 
-    {
+    {//Récupère tous les évènements PUBLICS
         $data = array();
         $this->db->select('*') -> from('event_plan') -> where(['private' => TRUE]) -> limit(10) -> offset($offset) -> order_by("event_id", "desc");
         $query = $this->db->get();
@@ -88,7 +94,7 @@ class Event_model extends CI_Model
     }
 
     public function isParticipants($eventId, $userId, $authorized)
-    {
+    {//Check si un user est participant d'un event ou non
         $data = array();
         $this->db->select('*') -> from('event_participants') -> where(['event_id' => $eventId, 'user_id' => $userId, 'authorized' => $authorized]);
         $query = $this->db->get();
@@ -98,7 +104,7 @@ class Event_model extends CI_Model
     }
 
     public function participantsList($id) 
-    {
+    {//Récupère tous les participants d'un évènement et les infos associées (besoins et cotisations)
         $data = array();
         $this->db->select('*') -> from('event_participants') -> where(['event_participants.event_id' => $id, 'authorized'=> TRUE, 'membership_fees.event_id' => $id]);
         $this->db->join('user', 'event_participants.user_id = user.id_user', 'left');
@@ -108,7 +114,7 @@ class Event_model extends CI_Model
     }
 
     public function claimersList($id) 
-    {
+    {//Récupère les participants en attente de validation du créateur de l'event
         $data = array();
         $this->db->select('*') -> from('event_participants') -> where(['event_participants.event_id' => $id, 'authorized'=> FALSE]);
         $this->db->join('user', 'event_participants.user_id = user.id_user', 'left');
@@ -117,7 +123,7 @@ class Event_model extends CI_Model
     }
 
     public function participantsRank($id) 
-    {
+    {//Récupère les infos des participants pour connaitre leur rang (Createur dans event_plan et admin ou invité dans event_participants)
         $this->db->select('*') -> from('event_plan') -> where(['event_participants.event_id' => $id]);
         $this->db->join('event_participants', 'event_participants.event_id = event_plan.event_id', 'outter');
         $query = $this->db->get();
@@ -125,7 +131,7 @@ class Event_model extends CI_Model
     }
 
     public function participantsNeeds($id)
-    {
+    {//Récupère les besoins d'un event
         $data = array();
         $this->db->select('*') -> from('event_needs') -> where(['event_id' => $id]);
         $this->db->join('needs_category', 'needs_category.id_category = event_needs.category', 'left');
@@ -134,14 +140,14 @@ class Event_model extends CI_Model
     }
 
     public function totalFees($id)
-    {
+    {//Calcule la cotisation totale des participants d'un event
         $this->db->select_sum('fees') -> from('membership_fees') -> where(['event_id' => $id]);
         $query = $this->db->get()->result_array();
         return $query;
     }
 
     public function newFees($eventId, $userId)
-    {
+    {//Nouvelle cotisation
         $data['user_id'] = $userId;
         $data['event_id'] = $eventId;
         $query = $this->db->select('*')
@@ -163,35 +169,35 @@ class Event_model extends CI_Model
     }
 
     public function newSupplier($needId, $userId) 
-    {
+    {//Indique un fournisseur à un besoin
         $data['supplier_id'] = $userId;
         $this->db->where('event_needs_id', $needId);
         $this->db->update('event_needs', $data);
     }
 
     public function removeSupplier($needId) 
-    {
+    {//Retire un fournisseur
         $data['supplier_id'] = NULL;
         $this->db->where('event_needs_id', $needId);
         $this->db->update('event_needs', $data);
     }
 
     public function rank($eventId, $userId, $state) 
-    {
+    {//Met à jour le rang d'un participant en fonction du param $state
         $data['super_user'] = $state;
         $this->db->where(['user_id' => $userId, 'event_id' => $eventId]);
         $this->db->update('event_participants', $data);
     }
 
     public function myEvents($id)
-    {
+    {//Récupère tous les évènements dont l'user est créateur
         $this->db->select('*') -> from('event_plan') -> where(['creator_id' => $id]) -> order_by("event_id", "desc");
         $query = $this->db->get();
         return $query;
     }
 
     public function iParticipate($id)
-    {
+    {//Récupère tous les évènements dont l'user est participant
         $this->db->select('*') -> from('event_participants') -> where(['user_id' => $id])  -> order_by("event_plan.event_id", "desc");
         $this->db->join('event_plan', 'event_plan.event_id = event_participants.event_id', 'inner');
         $query = $this->db->get();
@@ -199,12 +205,12 @@ class Event_model extends CI_Model
     }
 
     public function deleteEvent($eventId, $userId)
-    {
+    {//Supprime un event (Egalement utilisé pour le backoffice)
         $this->db->delete('event_plan', array('creator_id' => $userId, 'event_id' => $eventId));
     }
 
     public function editEvent($eventId, $userId, $image)
-    {
+    {//Edition d'évèenement
         $data['creator_id'] = $userId;
         $data['event_name'] = $this->input->post('event_name');
         $data['event_description'] = $this->input->post('event_description');
@@ -215,29 +221,35 @@ class Event_model extends CI_Model
         $data['max_fees'] = $this->input->post('max_fees');
 
         if(strlen($image) < 1 ) {
+            //Si le créateur n'a pas ajouté de nouvelle image, récupère l'actuelle
             $data['event_picture'] = $this->input->post('actual_pic');
         } else {
+            //Sinon prend la nouvelle
             $data['event_picture'] = $image;
             
             if($this->input->post('actual_pic') != 'default.jpg') {
+                //Si l'image de l'event n'est pas celle attribuée par défault, supprime l'image actuelle et ajoute la nouvelle
                 $actualpic = $this->input->post('actual_pic');
                 unlink("assets/images/uploaded_images/$actualpic");
             }
         }
         
         if($this->input->post('private')) {
+            //Conversion des values checkbox en booléen
             $data['private'] = TRUE;
         } else {
             $data['private'] = FALSE;
         }
 
         if($this->input->post('mandatory_fees')) {
+            //Conversion des values checkbox en booléen
             $data['mandatory_fees'] = TRUE;
         } else {
             $data['mandatory_fees'] = FALSE;
         }
 
         if($this->input->post('mandatory_needs')) {
+            //Conversion des values checkbox en booléen
             $data['mandatory_needs'] = TRUE;
         } else {
             $data['mandatory_needs'] = FALSE;
@@ -277,19 +289,19 @@ class Event_model extends CI_Model
     }
 
     public function removeNeed($needId)
-    {
+    {//Supprime un besoin
         $this->db->delete('event_needs', array('event_needs_id' => $needId));
     }
 
     public function claim($eventId, $userId)
-    {
+    {//Demande une invitation à un event
         $data['user_id'] = $userId;
         $data['event_id'] = $eventId;
         $this->db->insert('event_participants', $data);
     }
 
     public function acceptClaim($eventId, $userId)
-    {
+    {//Accepte une invitation à un event
         $fees['user_id'] = $userId;
         $fees['event_id'] = $eventId;
         $fees['fees'] = 0;
@@ -301,7 +313,7 @@ class Event_model extends CI_Model
     }
 
     public function deleteParticipant($eventId, $userId)
-    {
+    {//Supprime un participant
         $this->db->delete('event_participants', array('event_id' => $eventId, 'user_id' => $userId));
         $this->db->delete('membership_fees', array('event_id' => $eventId, 'user_id' => $userId));
 

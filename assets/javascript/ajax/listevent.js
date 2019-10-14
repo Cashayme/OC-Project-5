@@ -1,10 +1,10 @@
 function infiniteScroll() {
     // cette variable contient notre offset
-    // par défaut à 20 puisqu'on a d'office les 20 premiers éléments au chargement de la page
-    var offset = 0;
+    // par défaut à 15 puisqu'on a d'office les 15 premiers éléments au chargement de la page
+    var offset = 15;
   
     $(window).data('ajaxready', true);
-    // ici on ajoute un petit loader gif qui fera patienter pendant le chargement
+    // ici on ajoute un loader qui fera patienter pendant le chargement
     $('#content').append('<div id="loader"><img src="assets/images/rolling.svg" alt="loader ajax"></div>');
   
     var deviceAgent = navigator.userAgent.toLowerCase();
@@ -26,13 +26,13 @@ function infiniteScroll() {
             $.get('event/more/' + offset + '/', function(data){
                 // s'il y a des données
                 if (data != '') {
-                    // on les insère juste avant le loader.gif
+                    // on les insère juste avant le loader
                     $('#content #loader').before(data);
   
                     // on les affiche avec un fadeIn
                     $('#content .hidden').fadeIn(400).css("display","table-row");
   
-                    /* enfin on incrémente notre offset de 20
+                    /* enfin on incrémente notre offset de 10
                      * afin que la fois d'après il corresponde toujours
                     */
                     offset+= 10;

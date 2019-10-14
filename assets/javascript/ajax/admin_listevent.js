@@ -1,10 +1,10 @@
 function infiniteScroll() {
     // cette variable contient notre offset
-    // par défaut à 20 puisqu'on a d'office les 20 premiers éléments au chargement de la page
-    var offset = 0;
+    // par défaut à 15 puisqu'on a d'office les 15 premiers éléments au chargement de la page
+    var offset = 15;
   
     $(window).data('ajaxready', true);
-    // ici on ajoute un petit loader gif qui fera patienter pendant le chargement
+    // ici on ajoute un loader qui fera patienter pendant le chargement
     $('#content').append('<div id="loader"><img src="../ez_party/assets/images/rolling.svg" alt="loader ajax"></div>');
   
     var deviceAgent = navigator.userAgent.toLowerCase();

@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 
-    if(document.getElementById('content')){ 
+    if(document.getElementById('content')){
+        //Appel la fonction AJAX
         infiniteScroll();
     }
     

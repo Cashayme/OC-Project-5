@@ -31,7 +31,7 @@ class Event extends CI_Controller
         if ($this->login_model->checkLogin() > 0) {
             $this->load->library('form_validation');
 			
-            /* Validation rule */
+            // Validation rule 
            $this->form_validation->set_rules('event_name', 'Nom de l\'évènement', 'required');
            $this->form_validation->set_rules('event_description', 'Description', 'required');
            $this->form_validation->set_rules('city_address', 'Ville de l\'évènement', 'required');
@@ -44,7 +44,7 @@ class Event extends CI_Controller
                } else { 
                    $userId = $this->login_model->getInfos($this->session->userdata('email'), 'id_user');
 
-                   /* Config upload images*/
+                   // Config upload images
                    $config['encrypt_name'] = TRUE;
                    $config['upload_path']= './assets/images/uploaded_images';
                    $config['allowed_types']= 'gif|jpg|png';
@@ -70,7 +70,9 @@ class Event extends CI_Controller
             $data['event'] = $this->event_model->showEvent($id);
 
             if (!empty($data['event'][0])) {
+                //si l'event existe
                 if ($this->event_model->isParticipants($id, $this->session->userdata('id'), TRUE)) {
+                    //Si l'user est participant affiche le plan de l'event
                     $data['needs'] = $this->event_model->getEventNeeds($id);
                     $data['participants'] = $this->event_model->participantsList($id);
 
@@ -90,6 +92,7 @@ class Event extends CI_Controller
                    $this->layout->view('event_plan', $data);
     
                 } else if ($this->event_model->isParticipants($id, $this->session->userdata('id'), FALSE)){
+                    //Si l'user n'a pas encore été accepté à l'event affiche la vue d'invitation en attente 
     
                     $data['event'] = $this->event_model->showEvent($id);
                     $data['msg'] = 'Votre invitation n\'a pas encore été acceptée';
@@ -97,7 +100,7 @@ class Event extends CI_Controller
                     $this->layout->view('event_invit',$data);
     
                 } else {
-    
+                    //Si l'user n'a pas demandé à faire partie des participants
                     $data['event'] = $this->event_model->showEvent($id);
     
                     $this->layout->view('event_invit',$data);
@@ -120,7 +123,7 @@ class Event extends CI_Controller
             
             if ($this->form_validation->run() == FALSE) {
                 redirect('event/plan/'.$eventId.'');
-            } else { 
+            } else {
                 $this->event_model->newFees($eventId, $this->session->userdata('id'));
                 $this->session->set_userdata('toast-success', 'Nouvelle cotisation ajoutée');
                 redirect('event/plan/'.$eventId.'#fees');
@@ -203,7 +206,7 @@ class Event extends CI_Controller
                 } else { 
                     $userId = $this->session->userdata('id');
 
-                    /* Config upload images*/
+                    // Config upload images
                     $config['encrypt_name'] = TRUE;
                     $config['upload_path']= './assets/images/uploaded_images';
                     $config['allowed_types']= 'gif|jpg|png';

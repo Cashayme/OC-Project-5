@@ -33,6 +33,7 @@ class Admin extends CI_Controller
     }
 
     public function moreEvent($offset) {
+        //Appel AJAX des évenements
         if ($this->login_model->checkLogin() > 0) {
             if($this->admin_model->checkPowers($this->session->userdata('id'))) {
                 $data['events'] = $this->admin_model->listEvent($offset);
@@ -48,6 +49,7 @@ class Admin extends CI_Controller
     }
 
     public function moreUser($offset) {
+        //Appel AJAX des utilisateurs
         if ($this->login_model->checkLogin() > 0) {
             if($this->admin_model->checkPowers($this->session->userdata('id'))) {
                 $data['users'] = $this->admin_model->listUser($offset);
