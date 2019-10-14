@@ -28,7 +28,7 @@
 	$this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_check_customer');
     $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[35]');
     $this->form_validation->set_rules('city_address', 'Ville', 'required');
-    $this->form_validation->set_rules('zip_code_address', 'Code postal', 'required');
+    $this->form_validation->set_rules('zip_code_address', 'Code postal', 'required|min_length[5]|max_length[5]');
     $this->form_validation->set_rules('address', 'Adresse', 'required');	 
 			
         if ($this->form_validation->run() == FALSE) { 

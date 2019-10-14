@@ -46,7 +46,7 @@
         <div class="form-group row">
             <label for="password" class="col-4 col-form-label">Mot de passe</label> 
             <div class="col-8">
-            <input id="password" name="password" type="password" class="form-control" required="required">
+            <input id="password" minlength=6 maxlength=35 name="password" type="password" class="form-control" required="required">
             </div>
         </div>
         <div class="form-group row">
@@ -58,7 +58,7 @@
         <div class="form-group row">
             <label for="zip_code_address" class="col-4 col-form-label">Code postal</label> 
             <div class="col-8">
-            <input id="zip_code_address" name="zip_code_address" type="text" class="form-control" required="required">
+            <input id="zip_code_address" minlength=5 maxlength=5 name="zip_code_address" type="text" class="form-control" required="required">
             </div>
         </div>
         <div class="form-group row">
@@ -72,7 +72,6 @@
             <button name="submit" type="submit" class="btn btn-primary">S'enregister</button>
             </div>
         </div>
-
 </div>
     <?php 
 		echo form_close(); 

@@ -1,4 +1,4 @@
-@import 'bootstrap.min.css';
+@import "bootstrap.min.css";
 @import "libs/breakpoints.scss";
 @import "hamburgers/hamburgers.scss";
 @import "switch_button.css";
@@ -569,3 +569,42 @@ input {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+
+.carousel {
+    margin-top: 150px;
+    @include sm { margin-top: 90px; }
+    margin-bottom: 50px;
+
+    .text-slider { padding-top: 50px; }
+
+    h5 { 
+        font-size: 3rem; 
+        @include sm { max-height: 50px; }
+    }
+    p { 
+        max-height: 50px; 
+        @include sm { margin-top: 123px; }
+    }
+    
+    .carousel-indicators {
+            @include sm { margin-bottom: 236px; }
+            @include md { margin-bottom: 110px; }
+            @include lg { margin-bottom: 110px; }
+        }
+
+    img {
+        @include sm {
+            min-height: 200px; 
+            max-height: 200px;
+        }
+        @include md {
+            min-height: 450px; 
+            max-height: 450px;
+        }
+        @include lg {
+            min-height: 450px; 
+            max-height: 450px;
+        }
+    }
+}
+

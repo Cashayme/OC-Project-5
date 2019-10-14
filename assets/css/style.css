@@ -1,4 +1,4 @@
-@import 'bootstrap.min.css';
+@import "bootstrap.min.css";
 /*!
  * Hamburgers
  * @description Tasty CSS-animated hamburgers
@@ -1514,6 +1514,68 @@ input {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+
+.carousel {
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+@media (min-width: 176px) {
+  .carousel {
+    margin-top: 90px;
+  }
+}
+.carousel .text-slider {
+  padding-top: 50px;
+}
+.carousel h5 {
+  font-size: 3rem;
+}
+@media (min-width: 176px) {
+  .carousel h5 {
+    max-height: 50px;
+  }
+}
+.carousel p {
+  max-height: 50px;
+}
+@media (min-width: 176px) {
+  .carousel p {
+    margin-top: 123px;
+  }
+}
+@media (min-width: 176px) {
+  .carousel .carousel-indicators {
+    margin-bottom: 236px;
+  }
+}
+@media (min-width: 768px) {
+  .carousel .carousel-indicators {
+    margin-bottom: 110px;
+  }
+}
+@media (min-width: 992px) {
+  .carousel .carousel-indicators {
+    margin-bottom: 110px;
+  }
+}
+@media (min-width: 176px) {
+  .carousel img {
+    min-height: 200px;
+    max-height: 200px;
+  }
+}
+@media (min-width: 768px) {
+  .carousel img {
+    min-height: 450px;
+    max-height: 450px;
+  }
+}
+@media (min-width: 992px) {
+  .carousel img {
+    min-height: 450px;
+    max-height: 450px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -6,6 +6,7 @@
         <h1 class="p-3">J'y participe</h1>
         <?php } ?>
         <div class="row col-12 mt-4 table-responsive">
+        <?php if(!empty($events->result())) { ?>
             <table class="table table-dark">
                 <thead>
                     <tr>
@@ -17,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php  
                 foreach($events->result() as $event) 
                 { ?>
                     <tr>
@@ -45,6 +46,9 @@
                 <?php } ?>
                 </tbody>
             </table>
+            <?php } else { ?>
+            <h3 class="text-center">Aucun évènement ici...</h2>
+            <?php } ?>
         </div>
     </div>
 </div>

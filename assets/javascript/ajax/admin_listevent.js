@@ -5,7 +5,7 @@ function infiniteScroll() {
   
     $(window).data('ajaxready', true);
     // ici on ajoute un petit loader gif qui fera patienter pendant le chargement
-    $('#content').append('<div id="loader"><img src="../assets/images/rolling.svg" alt="loader ajax"></div>');
+    $('#content').append('<div id="loader"><img src="../ez_party/assets/images/rolling.svg" alt="loader ajax"></div>');
   
     var deviceAgent = navigator.userAgent.toLowerCase();
     var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
@@ -23,7 +23,7 @@ function infiniteScroll() {
             $('#content #loader').fadeIn(400).css("display","table-row");
   
             // puis on fait la requête pour demander les nouveaux éléments
-            $.get('../admin/moreevent/' + offset + '/', function(data){
+            $.get('../ez_party/admin/moreevent/' + offset + '/', function(data){
                 // s'il y a des données
                 if (data != '') {
                     // on les insère juste avant le loader.gif

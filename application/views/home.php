@@ -2,9 +2,14 @@
         <div class="col-12 box row mx-auto" id="presentation-container">
             <h1 class="col-lg-6 col-12">Organisez vos évènements privés ou publics sur <strong>EZ Party</strong></h1>
             <p class="col-lg-6 col-12 float-lg-right float-left">
-                    <strong>Lorem ipsum :</strong>  <br> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. <br> Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> <strong>Lorem ipsum :</strong>  <br> Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                    <strong>Evènements publics :</strong>  
+                    <br>
+                    Les évènements publics figurent sur la liste des évènements EZ Party, tous les utilisateurs du site peuvent demander à y participer, il est temps d'organiser votre plus grande soirée !
+                    <br>
+                    <br>
+                    <strong>Evènements privés :</strong>
+                    <br>
+                    Seul les personnes à qui vous aurez envoyé le lien de votre évènement pourront demander à y participer, ainsi donc vous pouvez organiser vos soirées entre amis en toute intimité.
             </p>
         </div>
 

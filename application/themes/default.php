@@ -23,7 +23,7 @@
             </button>
             <ul id="burger-nav" class="collapse">
                 <li class="nav-btn"><a href="<?php echo ''.site_url('/index').'' ?>"><i class="fas fa-home"></i>Accueil</a></li>
-                <li class="nav-btn"><a href="#"><i class="fas fa-info"></i>Informations</a></li>
+                <li class="nav-btn"><a href="<?php echo ''.site_url('/index/informations').'' ?>"><i class="fas fa-info"></i>Informations</a></li>
                 <li class="nav-btn"><a href="<?php echo ''.site_url('event').'' ?>"><i class="fas fa-glass-cheers"></i>Evènements</a></li>
                 <?php if(!($this->session->userdata('logged')))
                         echo '<li class="nav-btn"><a href="'.site_url('login/index').'"><i class="fas fa-sign-in-alt"></i>Connexion</a></li>';
@@ -51,7 +51,7 @@
             </div>
             <ul id="original-nav">
                 <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('/index').'' ?>"><i class="fas fa-home"></i>Accueil</a></li>
-                <li class="nav-btn original-btn"><a href="#"><i class="fas fa-info"></i>Informations</a></li>
+                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('/index/informations').'' ?>"><i class="fas fa-info"></i>Informations</a></li>
                 <img id="navlogo" src="<?php echo ''.img_url('logo').'' ?>" alt="logo de EZ Party">
                 <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('event').'' ?>"><i class="fas fa-glass-cheers"></i>Evènements</a></li>
                 <?php if(!($this->session->userdata('logged')))

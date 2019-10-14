@@ -27,6 +27,11 @@ class Index extends CI_Controller
 
     public function index()
     {
-        $this->layout->view('accueil');
+        $this->layout->view('home');
+    }
+
+    public function informations()
+    {
+        $this->layout->view('informations');
     }
 }
