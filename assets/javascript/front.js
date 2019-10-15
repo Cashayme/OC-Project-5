@@ -5,7 +5,7 @@ window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
 
-  if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
     document.getElementById("navbar").style.height = "60px";
     document.getElementById("navbar").style.borderBottom = "none";
 

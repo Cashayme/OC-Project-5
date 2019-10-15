@@ -145,6 +145,8 @@ nav {
         justify-content: center;
         list-style: none;
 
+        #linav { margin-top: 0; }
+
         li {
             width: 12rem;
             text-align: center;
@@ -571,8 +573,7 @@ input {
 }
 
 .carousel {
-    margin-top: 150px;
-    @include sm { margin-top: 90px; }
+    @include sm { margin-top: 113px; }
     margin-bottom: 50px;
 
     .text-slider { padding-top: 50px; }
@@ -593,6 +594,8 @@ input {
         }
 
     img {
+        box-shadow: -3px 3px 14px 2px black;
+
         @include sm {
             min-height: 200px; 
             max-height: 200px;

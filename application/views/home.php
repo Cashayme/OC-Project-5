@@ -48,7 +48,7 @@
                     </p>
                 </div>
 
-                <i class="fas fa-arrow-right d-sm-none d-md-none d-lg-none d-xl-block "></i>
+                <em class="fas fa-arrow-right d-sm-none d-md-none d-lg-none d-xl-block "></em>
                 <div class="col-xl-2 col-lg-10 underbox">
                     <h2>
                         Envoyez une invitiation
@@ -57,7 +57,7 @@
                         Envoyez le lien d’invitation à vos amis / collègues ou qui vous voulez !
                     </p>
                 </div>
-                <i class="fas fa-arrow-right d-sm-none d-md-none d-lg-none d-xl-block"></i>
+                <em class="fas fa-arrow-right d-sm-none d-md-none d-lg-none d-xl-block"></em>
                 <div class="col-xl-2 col-lg-10 underbox">
                     <h2>
                         Préparez les festivités
@@ -66,7 +66,7 @@
                         Demandez une cotisation à vos convives ou de ramener quelque chose selon votre liste.
                     </p>
                 </div>
-                <i class="fas fa-arrow-right d-none d-xl-block "></i>
+                <em class="fas fa-arrow-right d-none d-xl-block "></em>
                 <div class="col-xl-2 col-lg-10 underbox">
                     <h2>
                         EZ PARTY

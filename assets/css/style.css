@@ -1008,6 +1008,9 @@ nav ul {
   justify-content: center;
   list-style: none;
 }
+nav ul #linav {
+  margin-top: 0;
+}
 nav ul li {
   width: 12rem;
   text-align: center;
@@ -1517,12 +1520,11 @@ input {
 }
 
 .carousel {
-  margin-top: 150px;
   margin-bottom: 50px;
 }
 @media (min-width: 176px) {
   .carousel {
-    margin-top: 90px;
+    margin-top: 113px;
   }
 }
 .carousel .text-slider {
@@ -1558,6 +1560,9 @@ input {
   .carousel .carousel-indicators {
     margin-bottom: 110px;
   }
+}
+.carousel img {
+  box-shadow: -3px 3px 14px 2px black;
 }
 @media (min-width: 176px) {
   .carousel img {

@@ -22,43 +22,43 @@
                 </span> 
             </button>
             <ul id="burger-nav" class="collapse">
-                <li class="nav-btn"><a href="<?php echo ''.site_url('/index').'' ?>"><i class="fas fa-home"></i>Accueil</a></li>
-                <li class="nav-btn"><a href="<?php echo ''.site_url('/index/informations').'' ?>"><i class="fas fa-info"></i>Informations</a></li>
-                <li class="nav-btn"><a href="<?php echo ''.site_url('event').'' ?>"><i class="fas fa-glass-cheers"></i>Evènements</a></li>
+                <li class="nav-btn"><a href="<?php echo ''.site_url('/index').'' ?>"><em class="fas fa-home"></em>Accueil</a></li>
+                <li class="nav-btn"><a href="<?php echo ''.site_url('/index/informations').'' ?>"><em class="fas fa-info"></em>Informations</a></li>
+                <li class="nav-btn"><a href="<?php echo ''.site_url('event').'' ?>"><em class="fas fa-glass-cheers"></em>Evènements</a></li>
                 <?php if(!($this->session->userdata('logged')))
-                        echo '<li class="nav-btn"><a href="'.site_url('login/index').'"><i class="fas fa-sign-in-alt"></i>Connexion</a></li>';
+                        echo '<li class="nav-btn"><a href="'.site_url('login/index').'"><em class="fas fa-sign-in-alt"></em>Connexion</a></li>';
                     else 
                     {
-                        echo '<li class="nav-btn"><a href="'.site_url('login/logout').'"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>';
+                        echo '<li class="nav-btn"><a href="'.site_url('login/logout').'"><em class="fas fa-sign-out-alt"></em>Déconnexion</a></li>';
                     }
                 ?>
             </ul>
             <div class="dropdown profile-view" <?php if(!($this->session->userdata('logged'))) echo 'style= "display:none"'; ?>>
-                <button id="btn-lg" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="btn-lg" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo ''.$this->session->userdata('alias').'' ?>
                 </button>
-                <button id="btn-sm" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-circle"></i>
+                <button id="btn-sm" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <em class="fas fa-user-circle"></em>
                 </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="<?php echo ''.site_url('/profile').'' ?>"><i class="fas fa-user-alt"></i> Mon profil</a>
-                      <a class="dropdown-item" href="<?php echo ''.site_url("event/myevents").'' ?>"><i class="fas fa-glass-cheers"></i> Mes évènements</a>
-                      <a class="dropdown-item" href="<?php echo ''.site_url("event/iparticipate").'' ?>"><i class="fas fa-users"></i> J'y participe</a>
+                    <div class="dropdown-menu" >
+                      <a class="dropdown-item" href="<?php echo ''.site_url('/profile').'' ?>"><em class="fas fa-user-alt"></em> Mon profil</a>
+                      <a class="dropdown-item" href="<?php echo ''.site_url("event/myevents").'' ?>"><em class="fas fa-glass-cheers"></em> Mes évènements</a>
+                      <a class="dropdown-item" href="<?php echo ''.site_url("event/iparticipate").'' ?>"><em class="fas fa-users"></em> J'y participe</a>
                       <?php if(null !== $this->session->userdata('admin')) { ?>
-                        <a class="dropdown-item" href="<?php echo ''.site_url("admin").'' ?>"><i class="fas fa-tools"></i> Panneau d'administration</a>
+                        <a class="dropdown-item" href="<?php echo ''.site_url("admin").'' ?>"><em class="fas fa-tools"></em> Panneau d'administration</a>
                       <?php } ?>
                     </div>
             </div>
             <ul id="original-nav">
-                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('/index').'' ?>"><i class="fas fa-home"></i>Accueil</a></li>
-                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('/index/informations').'' ?>"><i class="fas fa-info"></i>Informations</a></li>
-                <img id="navlogo" src="<?php echo ''.img_url('logo').'' ?>" alt="logo de EZ Party">
-                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('event').'' ?>"><i class="fas fa-glass-cheers"></i>Evènements</a></li>
+                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('/index').'' ?>"><em class="fas fa-home"></em>Accueil</a></li>
+                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('/index/informations').'' ?>"><em class="fas fa-info"></em>Informations</a></li>
+                <li id="linav" ><img id="navlogo" src="<?php echo ''.img_url('logo').'' ?>" alt="logo de EZ Party"></li>
+                <li class="nav-btn original-btn"><a href="<?php echo ''.site_url('event').'' ?>"><em class="fas fa-glass-cheers"></em>Evènements</a></li>
                 <?php if(!($this->session->userdata('logged')))
-                        echo '<li class="nav-btn original-btn"><a href="'.site_url('login/index').'"><i class="fas fa-sign-in-alt"></i>Connexion</a></li>';
+                        echo '<li class="nav-btn original-btn"><a href="'.site_url('login/index').'"><em class="fas fa-sign-in-alt"></em>Connexion</a></li>';
                     else 
                     {
-                        echo '<li class="nav-btn original-btn"><a href="'.site_url('login/logout').'"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>';
+                        echo '<li class="nav-btn original-btn"><a href="'.site_url('login/logout').'"><em class="fas fa-sign-out-alt"></em>Déconnexion</a></li>';
                     }
                 ?>
             </ul>
@@ -86,21 +86,21 @@
             <h3>Suivez-nous sur tous nos réseaux sociaux :</h3>
             <ul>
                 <li>
-                    <a href=""><i class="fab fa-twitter-square"></i></a>
+                    <a href=""><em class="fab fa-twitter-square"></em></a>
                 </li>
                 <li>
-                    <a href=""><i class="fab fa-facebook-square"></i></a>
+                    <a href=""><em class="fab fa-facebook-square"></em></a>
                 </li>
                 <li>
-                    <a href=""><i class="fab fa-instagram"></i></a>
+                    <a href=""><em class="fab fa-instagram"></em></a>
                 </li>
                 <li>
-                    <a href=""><i class="fab fa-youtube-square"></i></a>
+                    <a href=""><em class="fab fa-youtube-square"></em></a>
                 </li>
             </ul>
         </div>
     </footer>
-</body>
+
 <?php foreach($js as $url): ?>
 		<script type="text/javascript" src="<?php echo $url; ?>"></script> 
 <?php endforeach; ?>
@@ -132,3 +132,4 @@
 </html>
 <?php $this->session->unset_userdata('toast-info'); ?>
 <?php } ?>
+</body>
