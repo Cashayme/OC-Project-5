@@ -1,6 +1,6 @@
 <div class="container-fluid wrapper mb-5">
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto box e-plan">
-    <?php foreach($event as $data) { ?>
+    <?php foreach(html_escape($event) as $data) { ?>
         <h1 class="p-3">Souhaitez vous participer à "<?php echo $data['event_name'] ?>" ?</h1>
         <div class="d-flex">
             <div class="col-6"><img class="img-fluid img-thumbnail mb-5" src="./../../assets/images/uploaded_images/<?php echo $data['event_picture']; ?>" alt="Image de l'évènement"></div>

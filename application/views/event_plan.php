@@ -133,7 +133,7 @@
                     <?php if((isset($creator)) || (isset($admin))) { ?>
                         <a class="text-danger" href="<?php echo site_url('event/removeneed/'.$need->event_id.'/'.$need->event_needs_id.'')?>"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title='Supprimer "<?php echo $need->need_name ?>" '></i></a>
                     <?php } ?>
-                    <?php echo $need->need_name; ?></th>
+                    <?php echo html_escape($need->need_name); ?></th>
 
                     <td><?php echo $need->category_name; 
                     ?></td>

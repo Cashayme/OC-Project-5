@@ -67,17 +67,17 @@ class Event extends CI_Controller
 
             $this->layout->add_js('map');
 
-            $data['event'] = $this->event_model->showEvent($id);
+            $data['event'] = html_escape($this->event_model->showEvent($id));
 
             if (!empty($data['event'][0])) {
                 //si l'event existe
                 if ($this->event_model->isParticipants($id, $this->session->userdata('id'), TRUE)) {
                     //Si l'user est participant affiche le plan de l'event
                     $data['needs'] = $this->event_model->getEventNeeds($id);
-                    $data['participants'] = $this->event_model->participantsList($id);
+                    $data['participants'] = html_escape($this->event_model->participantsList($id));
 
-                    $data['claimers'] = $this->event_model->claimersList($id);
-                    $data['p_needs'] = $this->event_model->participantsNeeds($id);
+                    $data['claimers'] = html_escape($this->event_model->claimersList($id));
+                    $data['p_needs'] = html_escape($this->event_model->participantsNeeds($id));
                     $data['p_rank'] = $this->event_model->participantsRank($id)[0];
                     $data['total_fees'] = $this->event_model->totalFees($id);
     
@@ -88,7 +88,7 @@ class Event extends CI_Controller
                     if($this->event_model->isAdmin($id, $this->session->userdata('id')) == 'admin') {
                         $data['admin'] = '1';
                     }
-    
+                    
                    $this->layout->view('event_plan', $data);
     
                 } else if ($this->event_model->isParticipants($id, $this->session->userdata('id'), FALSE)){

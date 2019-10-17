@@ -35,7 +35,7 @@ class Profile extends CI_Controller
                 $this->layout->view('profile',$data);
             } else {
                 $this->profile_model->editProfile($this->session->userdata('id'));
-                $data['success'] = "Votre profil a bien été édité !";
+                $this->session->set_userdata('toast-success', 'Votre profil a bien été modifié');
                 $data['user'] = $this->profile_model->showProfile($this->session->userdata('id'));
                 $this->layout->view('profile',$data);
             }

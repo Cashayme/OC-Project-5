@@ -35,7 +35,7 @@
             </ul>
             <div class="dropdown profile-view" <?php if(!($this->session->userdata('logged'))) echo 'style= "display:none"'; ?>>
                 <button id="btn-lg" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo ''.$this->session->userdata('alias').'' ?>
+                    <?php echo ''.html_escape($this->session->userdata('alias')).'' ?>
                 </button>
                 <button id="btn-sm" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <em class="fas fa-user-circle"></em>
